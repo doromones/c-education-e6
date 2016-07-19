@@ -19,9 +19,8 @@ function SlotMachine(money) {
   }
   
   this.getMoney = function(){
-    var allMoney = money + putedMoney;
+    var allMoney = money;
     money        = 0;
-    putedMoney   = 0;
     return allMoney;
   }
   
