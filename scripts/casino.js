@@ -1,11 +1,10 @@
 "use strict";
 
 function SlotMachine(money) {
-  var self = this;
   var money = Number(money);
   var putedMoney = 0;
   
-  self.putMoney = function(money){
+  this.putMoney = function(money){
     if (isNaN(money) || money <= 0) {
       throw '[SlotMachine] Start money must be greater 0';
     } else {
@@ -13,24 +12,24 @@ function SlotMachine(money) {
     }
   }
   
-  self.getWinnerMoney = function(){
+  this.getWinnerMoney = function(){
     var money  = putedMoney;
     putedMoney = 0
     return money;
   }
   
-  self.getAllMoney = function(){
+  this.getMoney = function(){
     var allMoney = money + putedMoney;
     money        = 0;
     putedMoney   = 0;
     return allMoney;
   }
   
-  self.showBank = function(){
+  this.showBank = function(){
     console.log('Bank is %i; you put %i', money, putedMoney);
   };
   
-  self.play = function(playSum){
+  this.play = function(playSum){
     if (money === 0) {
       throw '[SlotMachine] I\'m sorry, I empty. Select another machine.'
     }
@@ -93,13 +92,12 @@ function SlotMachine(money) {
       } else {
         console.log('You lose :(')
       }
-      self.showBank()
+      this.showBank()
     }
   }
 };
 
 function Casino(slotMachinesCount, money) {
-  var self = this;
   var slotMachines = [];
   
   var slotMachinesCount = Number(slotMachinesCount);
@@ -112,11 +110,11 @@ function Casino(slotMachinesCount, money) {
     throw '[Casino] Start money must be greater 0';
   }
   
-  self.getSlotMachinesCount = function() {
+  this.getSlotMachinesCount = function() {
     return slotMachines.length;
   };
   
-  self.getSlotMachine = function(index){
+  this.getSlotMachine = function(index){
     var machine = slotMachines[index]
     if (machine === undefined){
       throw '[Casino] slotMachine not found';
@@ -124,7 +122,7 @@ function Casino(slotMachinesCount, money) {
     return machine;
   };
   
-  self.printBank = function(){
+  this.printBank = function(){
     slotMachines.forEach(function(slotMachine, index){
       console.log('in %i slotMachine %i money', index, slotMachine.money)
     })
