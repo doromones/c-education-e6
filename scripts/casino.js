@@ -1,7 +1,7 @@
 "use strict";
 
 function SlotMachine(money) {
-  var money = Number(money);
+  money = Number(money);
   var putedMoney = 0;
   
   this.putMoney = function(money){
@@ -10,22 +10,17 @@ function SlotMachine(money) {
     } else {
       putedMoney += money;
     }
-  }
+  };
   
   this.getWinnerMoney = function(){
     var money  = putedMoney;
-    putedMoney = 0
+    putedMoney = 0;
     return money;
-  }
-  
-  this.getMoney = function(){
-    var allMoney = money;
-    money        = 0;
-    return allMoney;
-  }
-  
+  };
+
   this.showBank = function(){
     console.log('Bank is %i; you put %i', money, putedMoney);
+    return {money: money, putedMoney: putedMoney};
   };
   
   this.play = function(playSum){
@@ -94,17 +89,35 @@ function SlotMachine(money) {
       this.showBank()
     }
   }
-};
+  
+  return {
+    machine: this, 
+    destroy: function(){
+      if (money > 0) {
+        throw '[SlotMachine] Money exist in machine, please get money';
+      }
+      if (putedMoney > 0) {
+        throw '[SlotMachine] Putted Money exist in machine, please get money';
+      }
+      delete this;
+    },
+    getMoney: function(){
+      var _money = money;
+      money = 0;
+      return _money;
+    }
+  };
+}
 
 function Casino(slotMachinesCount, money) {
   var slotMachines = [];
   
-  var slotMachinesCount = Number(slotMachinesCount);
+  slotMachinesCount = Number(slotMachinesCount);
   if (isNaN(slotMachinesCount) || slotMachinesCount <= 0) {
     throw '[Casino] Slot Machines count must be greater 0';
   }
   
-  var money = Number(money);
+  money = Number(money);
   if (isNaN(money) || money <= 0) {
     throw '[Casino] Start money must be greater 0';
   }
@@ -114,7 +127,7 @@ function Casino(slotMachinesCount, money) {
   };
   
   this.getSlotMachine = function(index){
-    var machine = slotMachines[index]
+    var machine = slotMachines[index]['machine'];
     if (machine === undefined){
       throw '[Casino] slotMachine not found';
     }
@@ -122,9 +135,12 @@ function Casino(slotMachinesCount, money) {
   };
   
   this.printBank = function(){
+    var result = {};
     slotMachines.forEach(function(slotMachine, index){
-      console.log('in %i slotMachine %i money', index, slotMachine.money)
-    })
+      console.log('in %i slotMachine %i money', index, slotMachine.machine.showBank.money);
+      result[index] = slotMachine.machine.showBank.money;
+    });
+    return result;
   };
   
   (function() {
@@ -134,4 +150,4 @@ function Casino(slotMachinesCount, money) {
       slotMachines.push(new SlotMachine(i === 0 ? (mainMoney + remainderOfDivision) : mainMoney));
     }
   })();
-};
+}
