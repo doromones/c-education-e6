@@ -54,6 +54,7 @@ function SlotMachine(money) {
       console.log('!!! JACKPOT !!!')
       putedMoney += money;
       money       = 0;
+      console.log('You win %i;', putedMoney);
     } else {
       var result = {};
       String(number).split('').forEach(function(value){
@@ -64,13 +65,14 @@ function SlotMachine(money) {
       console.log('Mathed %i', maxNumbers)
       if (maxNumbers === 2 || maxNumbers === 3){
         var winnerSum = playSum * ( maxNumbers === 2 ? 2 : 5 )
-        winnerSum     = winnerSum >= money ? winnerSum : money
+        winnerSum     = winnerSum <= money ? winnerSum : money
         console.log('You win %i; You put to play %i', winnerSum, playSum);
         money        -= winnerSum;
         putedMoney   += winnerSum;
       } else {
         console.log('You lose :\'(');
       }
+      self.showBank()
     }
   }
 };
