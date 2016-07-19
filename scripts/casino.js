@@ -49,12 +49,22 @@ function SlotMachine(money) {
   
     var number = Math.round(Math.random() * 1000);
     console.log('You number is %i', number);
-  
+    
+    var play_obj = {
+      win:        false, 
+      money:      0, 
+      jackpot:    false, 
+      playSum:    playSum,
+      maxNumbers: 0,
+      number:     number
+    }
     if (number === 777){
-      console.log('!!! JACKPOT !!!')
-      putedMoney += money;
-      money       = 0;
-      console.log('You win %i;', putedMoney);
+      
+      putedMoney      += money;
+      money            = 0;
+      play_obj.win     = true;
+      play_obj.jackpot = true
+      play_obj.money   = putedMoney;
     } else {
       var result = {};
       String(number).split('').forEach(function(value){
@@ -62,15 +72,26 @@ function SlotMachine(money) {
       })
   
       var maxNumbers = Object.values(result).sort(function(a, b){if (a < b) return 1})[0]
-      console.log('Mathed %i', maxNumbers)
+      play_obj.maxNumbers = maxNumbers
+
       if (maxNumbers === 2 || maxNumbers === 3){
         var winnerSum = playSum * ( maxNumbers === 2 ? 2 : 5 )
         winnerSum     = winnerSum <= money ? winnerSum : money
-        console.log('You win %i; You put to play %i', winnerSum, playSum);
-        money        -= winnerSum;
-        putedMoney   += winnerSum;
+        money         -= winnerSum;
+        putedMoney    += winnerSum;
+        play_obj.win   = true
+        play_obj.money = winnerSum
+      }
+      
+      if (play_obj.win){
+        if (play_obj.jackpot) { 
+          console.log('!!! JACKPOT !!!')
+        } else {
+          console.log('Mathed %i', play_obj.maxNumbers)
+        }
+        console.log('You win %i; You put to play %i', play_obj.money, play_obj.playSum);
       } else {
-        console.log('You lose :\'(');
+        console.log('You lose :(')
       }
       self.showBank()
     }
