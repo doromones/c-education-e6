@@ -141,6 +141,12 @@ function Casino(slotMachinesCount, money) {
         return slotMachines.length;
     };
 
+    this.getSlotMachinesList = function(){
+      return slotMachines.map(function (slotMachine) {
+          return slotMachine.machine;
+      })
+    };
+
     this.getSlotMachine = function (index) {
         var machine = _getSlotMachine(index)['machine'];
         return machine;
