@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="App">
 <head>
   <meta charset='utf-8'/>
   <title>-= Casino =-</title>
@@ -9,16 +9,21 @@
   <!--Bootstrap-->
   <link rel="stylesheet" href="styles/bootstrap.min.css">
   <link rel="stylesheet" href="styles/bootstrap-theme.min.css">
-
   <script src="scripts/boostrap.min.js"></script>
+
+  <!--Angular-->
+  <script src="scripts/angular.js"></script>
 
   <!--Main css-->
   <link rel="stylesheet" href="styles/main.css">
+
   <!--Main scripts-->
   <script type="text/javascript" src="scripts/casino.js"></script>
   <script type="text/javascript" src="scripts/init.js"></script>
+  <script type="text/javascript" src="scripts/controllers/root.js"></script>
+
 </head>
-<body>
+<body ng-controller="RootController">
 <div class="col-md-6">
   <div class="row">
     <div class="col-md-12">
