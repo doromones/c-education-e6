@@ -5,6 +5,7 @@ app.controller('RootController', [
     '$log',
     'Casino',
     function ($scope, $log, Casino) {
+        window.RootController = $scope;
         window.DEBUG = true;
 
         var slotMachinesCount, casinoMoney;

@@ -2,6 +2,7 @@
 
 app.service('Casino', function (slotMachine) {
     var slotMachines = [];
+    this._slotMachine = slotMachine;
 
     function _getSlotMachine(index) {
         var machine = slotMachines[index];
@@ -18,16 +19,6 @@ app.service('Casino', function (slotMachine) {
     /* отладочная фигня, закоментить*/
     this.getRawMachine = function (index) {
         return _getSlotMachine.call(this, index);
-    };
-
-    this.getSlotMachinesCount = function () {
-        return slotMachines.length;
-    };
-
-    this.getSlotMachinesList = function () {
-        return slotMachines.map(function (slotMachine) {
-            return slotMachine.machine;
-        })
     };
 
     this.getSlotMachine = function (index) {
@@ -50,15 +41,6 @@ app.service('Casino', function (slotMachine) {
         }
     };
 
-    this.printBank = function () {
-        var result = {};
-        slotMachines.forEach(function (slotMachine, index) {
-            console.log('in %i slotMachine %i money', index, slotMachine.machine.getBankData().money);
-            result[index] = slotMachine.machine.getBankData().money;
-        });
-        return result;
-    };
-
     this.init = function (slotMachinesCount, money) {
         slotMachinesCount = Number(slotMachinesCount);
         if (isNaN(slotMachinesCount) || slotMachinesCount <= 0) {
@@ -73,8 +55,26 @@ app.service('Casino', function (slotMachine) {
         var mainMoney = Math.round(money / slotMachinesCount);
         var remainderOfDivision = money % slotMachinesCount;
         for (var i = 0; i < slotMachinesCount; i++) {
-            slotMachines.push(slotMachine.call(this, i === 0 ? (mainMoney + remainderOfDivision) : mainMoney));
+            slotMachines.push(new this._slotMachine( i === 0 ? (mainMoney + remainderOfDivision) : mainMoney));
         }
         return this;
     }
+
+    // getters
+    this.__defineGetter__('bank', function(){
+        var result = {};
+        slotMachines.forEach(function (slotMachine, index) {
+            var bankMoney = slotMachine.machine.getBankData();
+            console.log('in %i slotMachine %i money', index, bankMoney.money);
+            result[index] = bankMoney.money;
+        });
+        return result;
+    });
+
+    this.__defineGetter__('getSlotMachinesCount', function(){ return slotMachines.length; })
+
+    this.__defineGetter__('getSlotMachinesList', function(){
+        return slotMachines.map(function (slotMachine) { return slotMachine.machine; })
+    })
+
 });
