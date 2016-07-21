@@ -1,6 +1,7 @@
 "use strict";
 
 var app = angular.module('App', []);
+app.config(['$logProvider', function($logProvider){$logProvider.debugEnabled(true);}]);
 
 // $(function(){
 //     window.DEBUG = true;
