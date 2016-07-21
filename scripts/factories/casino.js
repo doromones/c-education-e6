@@ -1,8 +1,8 @@
 "use strict";
 
-app.service('Casino', ['slotMachine', function (slotMachine) {
+app.service('Casino', function (slotMachine) {
     var slotMachines = [];
-    debugger
+
     function _getSlotMachine(index) {
         var machine = slotMachines[index];
         if (machine === undefined) {
@@ -17,7 +17,7 @@ app.service('Casino', ['slotMachine', function (slotMachine) {
 
     /* отладочная фигня, закоментить*/
     this.getRawMachine = function (index) {
-        return _getSlotMachine(index);
+        return _getSlotMachine.call(this, index);
     };
 
     this.getSlotMachinesCount = function () {
@@ -39,7 +39,7 @@ app.service('Casino', ['slotMachine', function (slotMachine) {
         var machine = _getSlotMachine(index);
         var money = machine.getMoney();
 
-        _deleteSlotMachine(index);
+        _deleteSlotMachine.call(this, index);
         var _length = this.getSlotMachinesCount();
         var mainMoney = Math.round(money / _length);
         var remainderOfDivision = money % _length;
@@ -73,8 +73,8 @@ app.service('Casino', ['slotMachine', function (slotMachine) {
         var mainMoney = Math.round(money / slotMachinesCount);
         var remainderOfDivision = money % slotMachinesCount;
         for (var i = 0; i < slotMachinesCount; i++) {
-            slotMachines.push(new SlotMachine(i === 0 ? (mainMoney + remainderOfDivision) : mainMoney));
+            slotMachines.push(slotMachine.call(this, i === 0 ? (mainMoney + remainderOfDivision) : mainMoney));
         }
         return this;
     }
-}]);
+});

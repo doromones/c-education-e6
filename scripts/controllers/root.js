@@ -21,6 +21,5 @@ app.controller('RootController', [
         }
 
         $scope.casino = Casino.init(slotMachinesCount, casinoMoney);
-        debugger
     }
 ]);

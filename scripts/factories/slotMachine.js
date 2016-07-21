@@ -3,11 +3,16 @@
 app.service('slotMachine', function () {
     return function (money) {
         money = Number(money);
+
+        if (isNaN(money) || money <= 0) {
+            throw '[SlotMachine] money must be greater 0';
+        }
+
         var putedMoney = 0;
 
         this.putMoney = function (money) {
             if (isNaN(money) || money <= 0) {
-                throw '[SlotMachine] Start money must be greater 0';
+                throw '[SlotMachine] putMoney must be greater 0';
             } else {
                 putedMoney += money;
             }
