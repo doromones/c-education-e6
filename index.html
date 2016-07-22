@@ -46,7 +46,7 @@
       <div class="panel panel-default">
         <div class="panel-heading">Список Автоматов</div>
         <div id="slotMachines" class="list-group">
-          <a href="#" class="list-group-item" ng-repeat="machine in casino.getSlotMachinesList track by $index">
+          <a href="#" class="list-group-item" ng-repeat="machine in casino.getSlotMachinesList track by $index" ng-click="selectSlotMachine($index)">
             <span class="badge">$ {{machine.getBankData().putedMoney}}</span>
             <span class="badge">$ {{machine.getBankData().money}}</span>
             Автомат # {{$index}}
