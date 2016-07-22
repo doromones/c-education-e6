@@ -58,20 +58,16 @@ app.service('Casino', function (slotMachine) {
             slotMachines.push(new this._slotMachine( i === 0 ? (mainMoney + remainderOfDivision) : mainMoney));
         }
         return this;
-    }
+    };
 
     // getters
     this.__defineGetter__('bank', function(){
-        var result = {};
-        slotMachines.forEach(function (slotMachine, index) {
-            var bankMoney = slotMachine.machine.getBankData();
-            console.log('in %i slotMachine %i money', index, bankMoney.money);
-            result[index] = bankMoney.money;
-        });
+        var result = 0;
+        slotMachines.forEach(function (slotMachine) { result += slotMachine.machine.getBankData().money; });
         return result;
     });
 
-    this.__defineGetter__('getSlotMachinesCount', function(){ return slotMachines.length; })
+    this.__defineGetter__('getSlotMachinesCount', function(){ return slotMachines.length; });
 
     this.__defineGetter__('getSlotMachinesList', function(){
         return slotMachines.map(function (slotMachine) { return slotMachine.machine; })
