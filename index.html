@@ -61,7 +61,23 @@
         <div class="panel-heading">Управление казино</div>
         <div class="panel-body">
           <div class="col-md-12">
-            Денег: {{casino.bank}}
+            Кол-во Денег: {{casino.bank}}
+          </div>
+          <div class="col-md-12">
+            Кол-во Автоматов: {{casino.getSlotMachinesCount}}
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <div class="input-group">
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="getMoney()">Забрать деньги</button>
+                </span>
+                <input type="number" min="0" class="form-control" ng-model="getMoneySum">
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="addSlotMachine()">Добавить автомат</button>
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
