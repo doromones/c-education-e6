@@ -6,7 +6,7 @@ app.controller('RootController', [
     'Casino',
     function ($scope, $log, Casino) {
         window.RootController = $scope;
-        window.DEBUG = true;
+        window.DEBUG = false;
 
         var slotMachinesCount, casinoMoney;
         if (window.DEBUG) {
@@ -23,8 +23,9 @@ app.controller('RootController', [
 
         $scope.casino = Casino.init(slotMachinesCount, casinoMoney);
 
-        $scope.destroySlotMachine = function($index){
-            $scope.casino.destroySlotMachine($index);
-        };
+        function retOnlyIntGteZero (value){
+            value = Number(value);
+            return isNaN(value) || value <= 0 ? null : value
+        }
     }
 ]);
