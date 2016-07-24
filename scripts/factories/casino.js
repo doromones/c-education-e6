@@ -16,10 +16,16 @@ app.service('Casino', function (slotMachine) {
         slotMachines.splice(index, 1);
     }
 
+    function _getSortedMachines(){
+        return slotMachines.sort(function(a,b){
+            return a.machine.getBankData().money > b.machine.getBankData().money ? -1 : 1
+        });
+    }
+
     /* отладочная фигня, закоментить*/
-    this.getRawMachine = function (index) {
-        return _getSlotMachine.call(this, index);
-    };
+    // this.getRawMachine = function (index) {
+    //     return _getSlotMachine.call(this, index);
+    // };
 
     this.getSlotMachine = function (index) {
         var machine = _getSlotMachine(index)['machine'];
@@ -27,12 +33,9 @@ app.service('Casino', function (slotMachine) {
     };
 
     this.createSlotMachine = function () {
-        var machine = this.getSlotMachinesList.sort(function(a, b){
-            return a.getBankData().money > b.getBankData().money ? -1 : 1;
-        })[0];
-
-        var money = Math.floor(machine.getBankData().money / 2);
-        slotMachines.find(function(_machine){return _machine.machine === machine;}).getMoney(money);
+        var machine = _getSortedMachines.call(this)[0];
+        var money = Math.floor(machine.machine.getBankData().money / 2);
+        machine.getMoney(money);
         slotMachines.push(new this._slotMachine( money ));
     };
 
