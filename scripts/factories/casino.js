@@ -31,7 +31,7 @@ app.service('Casino', function (slotMachine) {
         var money = machine.getMoney();
 
         _deleteSlotMachine.call(this, index);
-        var _length = this.getSlotMachinesCount();
+        var _length = this.getSlotMachinesCount;
         var mainMoney = Math.round(money / _length);
         var remainderOfDivision = money % _length;
 

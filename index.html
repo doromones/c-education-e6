@@ -48,10 +48,13 @@
         <div class="panel-heading">Список Автоматов</div>
         <div id="slotMachines" class="list-group">
           <a href="#" class="list-group-item" ng-repeat="machine in casino.getSlotMachinesList track by $index" ng-click="selectSlotMachine($index)">
-            <span class="badge">$ {{machine.getBankData().putedMoney}}</span>
-            <span class="badge">$ {{machine.getBankData().money}}</span>
-            Автомат # {{$index}}
+            <!--<span class="btn btn-danger pull-right">Удалить</span>-->
+            <span class="pull-right">
+              <button class="btn btn-xs btn-danger" ng-click="destroySlotMachine($index);">Удалить</button>
+            </span>
+            Автомат # {{$index}}; Денег банка ${{machine.getBankData().money}} Вложенных денег $ {{machine.getBankData().putedMoney}}
           </a>
+
         </div>
       </div>
     </div>

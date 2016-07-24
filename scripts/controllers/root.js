@@ -22,5 +22,9 @@ app.controller('RootController', [
         }
 
         $scope.casino = Casino.init(slotMachinesCount, casinoMoney);
+
+        $scope.destroySlotMachine = function($index){
+            $scope.casino.destroySlotMachine($index);
+        };
     }
 ]);
