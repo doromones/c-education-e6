@@ -100,6 +100,10 @@ app.service('slotMachine', function () {
             machine: this,
             getMoney: function (withdraw) {
                 withdraw = isNaN(Number(withdraw)) ? money : Number(withdraw);
+                if (isNaN(withdraw) || withdraw <= 0) {
+                    throw new Error('[SlotMachine] Withdraw must be greater 0');
+                }
+                console.log(withdraw);
                 money -= withdraw;
                 return withdraw;
             },

@@ -32,6 +32,21 @@ app.service('Casino', function (slotMachine) {
         return machine;
     };
 
+    this.getMoney = function(money){
+        money = Number(money);
+        if (isNaN(money) || money <= 0) {
+            throw new Error('[Casino] Money must be greater 0');
+        }
+        _getSortedMachines.call(this).forEach(function(machine){
+            if (money === 0) return false;
+            var inMachineMoney = machine.machine.getBankData().money;
+            var _gettedMoney = money <= inMachineMoney ? money : inMachineMoney;
+
+            money -= _gettedMoney;
+            machine.getMoney(_gettedMoney);
+        });
+    };
+
     this.createSlotMachine = function () {
         var machine = _getSortedMachines.call(this)[0];
         var money = Math.floor(machine.machine.getBankData().money / 2);
