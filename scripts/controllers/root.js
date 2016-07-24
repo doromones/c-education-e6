@@ -15,10 +15,10 @@ app.controller('RootController', [
         }
 
         while (!slotMachinesCount) {
-            slotMachinesCount = retOnlyIntGteZero(prompt('Сколько в казино автоматов?', '5'))
+            slotMachinesCount = retOnlyIntGteZero(prompt('Сколько в казино автоматов?', slotMachinesCount))
         }
         while (!casinoMoney) {
-            casinoMoney = retOnlyIntGteZero(prompt('Сколько в казино Денег?', '513'))
+            casinoMoney = retOnlyIntGteZero(prompt('Сколько в казино Денег?', casinoMoney))
         }
 
         $scope.casino = Casino.init(slotMachinesCount, casinoMoney);
