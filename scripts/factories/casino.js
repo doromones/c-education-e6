@@ -32,7 +32,7 @@ app.service('Casino', function (slotMachine) {
 
         _deleteSlotMachine.call(this, index);
         var _length = this.getSlotMachinesCount;
-        var mainMoney = Math.round(money / _length);
+        var mainMoney = Math.floor(money / _length);
         var remainderOfDivision = money % _length;
 
         for (var i = 0; i < _length; i++) {
@@ -52,8 +52,9 @@ app.service('Casino', function (slotMachine) {
             throw new Error('[Casino] Start money must be greater 0');
         }
 
-        var mainMoney = Math.round(money / slotMachinesCount);
+        var mainMoney = Math.floor(money / slotMachinesCount);
         var remainderOfDivision = money % slotMachinesCount;
+        console.log(mainMoney, remainderOfDivision)
         for (var i = 0; i < slotMachinesCount; i++) {
             slotMachines.push(new this._slotMachine( i === 0 ? (mainMoney + remainderOfDivision) : mainMoney));
         }
