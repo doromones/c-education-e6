@@ -98,10 +98,10 @@ app.service('slotMachine', function () {
 
         return {
             machine: this,
-            getMoney: function () {
-                var _money = money;
-                money = 0;
-                return _money;
+            getMoney: function (withdraw) {
+                withdraw = isNaN(Number(withdraw)) ? money : Number(withdraw);
+                money -= withdraw;
+                return withdraw;
             },
             addMoney: function (_money) {
                 _money = Number(_money);

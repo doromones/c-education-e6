@@ -26,6 +26,16 @@ app.service('Casino', function (slotMachine) {
         return machine;
     };
 
+    this.createSlotMachine = function () {
+        var machine = this.getSlotMachinesList.sort(function(a, b){
+            return a.getBankData().money > b.getBankData().money ? -1 : 1;
+        })[0];
+
+        var money = Math.floor(machine.getBankData().money / 2);
+        slotMachines.find(function(_machine){return _machine.machine === machine;}).getMoney(money);
+        slotMachines.push(new this._slotMachine( money ));
+    };
+
     this.destroySlotMachine = function (index) {
         var machine = _getSlotMachine(index);
         var money = machine.getMoney();
@@ -54,7 +64,6 @@ app.service('Casino', function (slotMachine) {
 
         var mainMoney = Math.floor(money / slotMachinesCount);
         var remainderOfDivision = money % slotMachinesCount;
-        console.log(mainMoney, remainderOfDivision)
         for (var i = 0; i < slotMachinesCount; i++) {
             slotMachines.push(new this._slotMachine( i === 0 ? (mainMoney + remainderOfDivision) : mainMoney));
         }
