@@ -5,14 +5,14 @@ app.service('slotMachine', function () {
         money = Number(money);
 
         if (isNaN(money) || money <= 0) {
-            throw '[SlotMachine] money must be greater 0';
+            throw new Error('[SlotMachine] money must be greater 0');
         }
 
         var putedMoney = 0;
 
         this.putMoney = function (money) {
             if (isNaN(money) || money <= 0) {
-                throw '[SlotMachine] putMoney must be greater 0';
+                throw new Error('[SlotMachine] putMoney must be greater 0');
             } else {
                 putedMoney += money;
             }
@@ -30,16 +30,16 @@ app.service('slotMachine', function () {
 
         this.play = function (playSum) {
             if (money === 0) {
-                throw '[SlotMachine] I\'m sorry, I empty. Select another machine.'
+                throw new Error('[SlotMachine] I\'m sorry, I empty. Select another machine.');
             }
             if (putedMoney === 0) {
-                throw '[SlotMachine] I\'m sorry, You empty. Please fill the money.'
+                throw new Error('[SlotMachine] I\'m sorry, You empty. Please fill the money.');
             }
             if (isNaN(playSum) || playSum <= 0) {
-                throw '[SlotMachine] Play money must be greater 0';
+                throw new Error('[SlotMachine] Play money must be greater 0');
             }
             if (playSum > putedMoney) {
-                throw '[SlotMachine] Play money must be greater then putted money';
+                throw new Error('[SlotMachine] Play money must be greater then putted money');
             }
 
             putedMoney -= playSum;
@@ -106,7 +106,7 @@ app.service('slotMachine', function () {
             addMoney: function (_money) {
                 _money = Number(_money);
                 if (isNaN(_money) || _money <= 0) {
-                    throw '[SlotMachine] Money must be greater 0';
+                    throw new Error('[SlotMachine] Money must be greater 0');
                 }
                 money += _money;
             }

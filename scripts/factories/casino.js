@@ -7,7 +7,7 @@ app.service('Casino', function (slotMachine) {
     function _getSlotMachine(index) {
         var machine = slotMachines[index];
         if (machine === undefined) {
-            throw '[Casino] slotMachine not found';
+            throw new Error('[Casino] slotMachine not found');
         }
         return machine;
     }
@@ -44,12 +44,12 @@ app.service('Casino', function (slotMachine) {
     this.init = function (slotMachinesCount, money) {
         slotMachinesCount = Number(slotMachinesCount);
         if (isNaN(slotMachinesCount) || slotMachinesCount <= 0) {
-            throw '[Casino] Slot Machines count must be greater 0';
+            throw new Error('[Casino] Slot Machines count must be greater 0');
         }
 
         money = Number(money);
         if (isNaN(money) || money <= 0) {
-            throw '[Casino] Start money must be greater 0';
+            throw new Error('[Casino] Start money must be greater 0');
         }
 
         var mainMoney = Math.round(money / slotMachinesCount);
