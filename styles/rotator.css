@@ -1,4 +1,7 @@
-
+rotator {
+    min-height: 210px;
+    display: block;
+}
 .rotator-wrapper,
 .rotator figure {
     height: 100px;
@@ -99,7 +102,6 @@
     -o-perspective: 1100px;
     perspective: 1100px;
 
-    height: 210px;
     padding-top: 50px;
 }
 

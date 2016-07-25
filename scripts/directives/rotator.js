@@ -18,21 +18,21 @@ app.directive('rotator', function () {
             startRotating($second_wheel, 1500);
             startRotating($third_wheel, 2000);
 
+            function setPosition($wheel, position) {
+                $wheel.css({
+                    '-webkit-transform': 'rotateX(' + (position * -36) + 'deg)',
+                    '-moz-transform': 'rotateX(' + (position * -36) + 'deg)',
+                    '-o-transform': 'rotateX(' + (position * -36) + 'deg)',
+                    'transform': 'rotateX(' + (position * -36) + 'deg)'
+                });
+                $wheel.attr('data-state', position % 10);
+            }
+
             function startRotating($wheel, time) {
                 var increment = 0;
                 return setInterval(function () {
                     increment++;
-                    $wheel.css({
-                        '-webkit-transform': 'rotateX(' + (increment * -36) + 'deg)',
-                        '-moz-transform': 'rotateX(' + (increment * -36) + 'deg)',
-                        '-o-transform': 'rotateX(' + (increment * -36) + 'deg)',
-                        'transform': 'rotateX(' + (increment * -36) + 'deg)'
-                    });
-                    var pastSix = 0;
-                    if (increment > 9) {
-                        increment
-                    }
-                    $wheel.attr('data-state', increment % 10);
+                    setPosition($wheel, increment);
                 }, time || 1000);
             }
         }
