@@ -20,6 +20,7 @@
   <!--Main scripts-->
   <!--<script type="text/javascript" src="scripts/casino.js"></script>-->
   <script type="text/javascript" src="scripts/init.js"></script>
+  <script type="text/javascript" src="scripts/directives/rotator.js"></script>
   <script type="text/javascript" src="scripts/controllers/root.js"></script>
   <script type="text/javascript" src="scripts/factories/casino.js"></script>
   <script type="text/javascript" src="scripts/factories/slotMachine.js"></script>
@@ -40,21 +41,7 @@
           <span>Добро Пожаловать в Игру</span>
         </div>
         <div class="panel-body">
-          <div class="col-md-4">
-            <div class="col-md-12 number-center">
-              7
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="col-md-12 number-center">
-              7
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="col-md-12 number-center">
-              7
-            </div>
-          </div>
+          <div rotator></div>
         </div>
         <div class="panel-footer">
           <div class="col-md-4"></div>
@@ -126,5 +113,22 @@
     </div>
   </div>
 </div>
+<script id="rotator.html" type="text/ng-template">
+  <div class="col-md-4">
+    <div class="col-md-12 number-center">
+      7
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="col-md-12 number-center">
+      7
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="col-md-12 number-center">
+      7
+    </div>
+  </div>
+</script>
 </body>
 </html>
