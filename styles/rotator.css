@@ -7,42 +7,72 @@
 
 .rotator figure:nth-of-type(1) {
     -webkit-transform: rotateX(0deg) translateZ(86px);
+    -moz-transform: rotateX(0deg) translateZ(86px);
+    -o-transform: rotateX(0deg) translateZ(86px);
+    transform: rotateX(0deg) translateZ(86px);
 }
 
 .rotator figure:nth-of-type(2) {
     -webkit-transform: rotateX(36deg) translateZ(86px);
+    -moz: rotateX(36deg) translateZ(86px);
+    -o-transform: rotateX(36deg) translateZ(86px);
+    transform: rotateX(36deg) translateZ(86px);
 }
 
 .rotator figure:nth-of-type(3) {
     -webkit-transform: rotateX(72deg) translateZ(86px);
+    -moz-transform: rotateX(72deg) translateZ(86px);
+    -o-transform: rotateX(72deg) translateZ(86px);
+    transform: rotateX(72deg) translateZ(86px);
 }
 
 .rotator figure:nth-of-type(4) {
     -webkit-transform: rotateX(108deg) translateZ(86px);
+    -moz-transform: rotateX(108deg) translateZ(86px);
+    -o-transform: rotateX(108deg) translateZ(86px);
+    transform: rotateX(108deg) translateZ(86px);
 }
 
 .rotator figure:nth-of-type(5) {
     -webkit-transform: rotateX(144deg) translateZ(86px);
+    -moz-transform: rotateX(144deg) translateZ(86px);
+    -o-transform: rotateX(144deg) translateZ(86px);
+    transform: rotateX(144deg) translateZ(86px);
 }
 
 .rotator figure:nth-of-type(6) {
     -webkit-transform: rotateX(180deg) translateZ(86px);
+    -moz-transform: rotateX(180deg) translateZ(86px);
+    -o-transform: rotateX(180deg) translateZ(86px);
+    transform: rotateX(180deg) translateZ(86px);
 }
 
 .rotator figure:nth-of-type(7) {
     -webkit-transform: rotateX(216deg) translateZ(86px);
+    -moz-transform: rotateX(216deg) translateZ(86px);
+    -o-transform: rotateX(216deg) translateZ(86px);
+    transform: rotateX(216deg) translateZ(86px);
 }
 
 .rotator figure:nth-of-type(8) {
     -webkit-transform: rotateX(252deg) translateZ(86px);
+    -moz-transform: rotateX(252deg) translateZ(86px);
+    -o-transform: rotateX(252deg) translateZ(86px);
+    transform: rotateX(252deg) translateZ(86px);
 }
 
 .rotator figure:nth-of-type(9) {
     -webkit-transform: rotateX(288deg) translateZ(86px);
+    -moz-transform: rotateX(288deg) translateZ(86px);
+    -o-transform: rotateX(288deg) translateZ(86px);
+    transform: rotateX(288deg) translateZ(86px);
 }
 
 .rotator figure:nth-of-type(10) {
     -webkit-transform: rotateX(324deg) translateZ(86px);
+    -moz-transform: rotateX(324deg) translateZ(86px);
+    -o-transform: rotateX(324deg) translateZ(86px);
+    transform: rotateX(324deg) translateZ(86px);
 }
 
 .rotator[data-state="0"] figure:nth-of-type(1),
@@ -59,15 +89,18 @@
 }
 
 .rotator-wrapper {
-    position: absolute;
-    top: 30%;
-    left: 25%;
-    width: 50%;
+    /*position: absolute;*/
+    /*top: 30%;*/
+    /*left: 25%;*/
+    /*width: 50%;*/
     text-align: center;
     -webkit-perspective: 1100px;
     -moz-perspective: 1100px;
     -o-perspective: 1100px;
     perspective: 1100px;
+
+    height: 210px;
+    padding-top: 50px;
 }
 
 .rotator {
@@ -83,6 +116,11 @@
     -moz-transition: all 1s;
     -o-transition: all 1s;
     transition: all 1s;
+
+    transform: rotateX(0deg);
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    -o-transform: rotateX(0deg);
 }
 
 .rotator figure {
