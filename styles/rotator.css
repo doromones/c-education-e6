@@ -133,7 +133,7 @@
     color: black;
     text-align: center;
     opacity: .2;
-    webkit-transition: all 1s;
+    -webkit-transition: all 1s;
     -moz-transition: all 1s;
     -o-transition: all 1s;
     transition: all 1s;

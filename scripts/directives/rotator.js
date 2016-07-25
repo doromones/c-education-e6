@@ -14,9 +14,9 @@ app.directive('rotator', function () {
             var $second_wheel = angular.element($rotators[1]);
             var $third_wheel = angular.element($rotators[2]);
 
-            // startRotating($first_wheel, 1000);
+            startRotating($first_wheel, 1000);
             startRotating($second_wheel, 1500);
-            // startRotating($third_wheel, 2000);
+            startRotating($third_wheel, 2000);
 
             function startRotating($wheel, time) {
                 var increment = 0;
