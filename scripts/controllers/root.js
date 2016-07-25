@@ -31,5 +31,9 @@ app.controller('RootController', [
             value = Number(value);
             return isNaN(value) || value <= 0 ? null : value
         }
+
+        if (window.DEBUG) {
+            $scope.selectSlotMachine($scope.casino.getSlotMachine(0));
+        }
     }
 ]);
