@@ -23,7 +23,10 @@ app.directive('rotator', function () {
                 return setInterval(function () {
                     increment++;
                     $wheel.css({
-                        '-webkit-transform': 'rotateX(' + (increment * -36) + 'deg)'
+                        '-webkit-transform': 'rotateX(' + (increment * -36) + 'deg)',
+                        '-moz-transform': 'rotateX(' + (increment * -36) + 'deg)',
+                        '-o-transform': 'rotateX(' + (increment * -36) + 'deg)',
+                        'transform': 'rotateX(' + (increment * -36) + 'deg)'
                     });
                     var pastSix = 0;
                     if (increment > 9) {
