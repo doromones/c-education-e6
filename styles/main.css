@@ -1,3 +1,20 @@
 html, body {
     height: 100%;
 }
+
+.number-center {
+    font-size: 160px;
+    text-align: center;
+    border: 1px solid;
+    border-radius: 20px;
+    vertical-align: middle;
+}
+
+.btn-xlarge {
+    padding: 18px 28px;
+    font-size: 45px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    width: 100%;
+}

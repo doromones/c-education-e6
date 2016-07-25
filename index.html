@@ -30,8 +30,42 @@
 <div class="col-md-6">
   <div class="row">
     <div class="col-md-12">
-      <div class="well">
-        left top
+      <div class="panel panel-default" ng-if="!selectedMachine">
+        <div class="panel-heading">
+          <span>Выберите автомат</span>
+        </div>
+      </div>
+      <div class="panel panel-default" ng-if="selectedMachine">
+        <div class="panel-heading">
+          <span>Добро Пожаловать в Игру</span>
+        </div>
+        <div class="panel-body">
+          <div class="col-md-4">
+            <div class="col-md-12 number-center">
+              7
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="col-md-12 number-center">
+              7
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="col-md-12 number-center">
+              7
+            </div>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <div class="col-md-4"></div>
+          <div class="col-md-4 text-center">
+            <div class="btn btn-xlarge btn-success">
+              Играть!
+            </div>
+          </div>
+          <div class="col-md-4"></div>
+          <div class="clearfix"></div>
+        </div>
       </div>
     </div>
     <div class="col-md-12">
@@ -47,12 +81,15 @@
       <div class="panel panel-default">
         <div class="panel-heading">Список Автоматов</div>
         <div id="slotMachines" class="list-group">
-          <a href="#" class="list-group-item" ng-repeat="machine in casino.getSlotMachinesList track by $index" ng-click="selectSlotMachine($index)">
+          <a href="#" class="list-group-item" ng-repeat="machine in casino.getSlotMachinesList track by $index"
+             ng-click="selectSlotMachine(machine)">
             <!--<span class="btn btn-danger pull-right">Удалить</span>-->
             <span class="pull-right">
-              <button class="btn btn-xs btn-danger" ng-click="casino.destroySlotMachine($index);" ng_disabled="casino.getSlotMachinesCount === 1">Удалить</button>
+              <button class="btn btn-xs btn-danger" ng-click="casino.destroySlotMachine($index);"
+                      ng_disabled="casino.getSlotMachinesCount === 1">Удалить</button>
             </span>
-            Автомат # {{$index}}; Денег банка ${{machine.getBankData().money}} Вложенных денег $ {{machine.getBankData().putedMoney}}
+            Автомат # {{$index}}; Денег банка ${{machine.getBankData().money}} Вложенных денег $
+            {{machine.getBankData().putedMoney}}
           </a>
         </div>
       </div>
@@ -73,11 +110,13 @@
             <div class="form-group">
               <div class="input-group">
                 <span class="input-group-btn">
-                  <button type="button" class="btn btn-default" ng-click="casino.getMoney(getMoneySum)">Забрать деньги</button>
+                  <button type="button" class="btn btn-default"
+                          ng-click="casino.getMoney(getMoneySum)">Забрать деньги</button>
                 </span>
                 <input type="number" min="0" class="form-control" ng-model="getMoneySum">
                 <span class="input-group-btn">
-                  <button type="button" class="btn btn-default" ng-click="casino.createSlotMachine()">Добавить автомат</button>
+                  <button type="button" class="btn btn-default"
+                          ng-click="casino.createSlotMachine()">Добавить автомат</button>
                 </span>
               </div>
             </div>

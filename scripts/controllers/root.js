@@ -23,6 +23,10 @@ app.controller('RootController', [
 
         $scope.casino = Casino.init(slotMachinesCount, casinoMoney);
 
+        $scope.selectSlotMachine = function(machine){
+            $scope.selectedMachine = machine;
+        };
+
         function retOnlyIntGteZero (value){
             value = Number(value);
             return isNaN(value) || value <= 0 ? null : value
