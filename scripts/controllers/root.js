@@ -32,7 +32,16 @@ app.controller('RootController', [
         };
 
         $scope.playResultCallback = function(){
-            alert('asdasd')
+            var res = $scope.result;
+            if (res.win){
+                if (res.jackpot) {
+                    alert('!!!JACKPOT!!!')
+                } else {
+                    alert('Вы поставили ' +res.playSum+ ' и выиграли ' + res.money)
+                }
+            } else {
+                alert('You Lose :(');
+            }
         };
 
         function retOnlyIntGteZero (value){

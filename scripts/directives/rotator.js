@@ -15,7 +15,6 @@ app.directive('rotator', function () {
             window.Rotators = $scope;
 
             $scope.$watch('result', function(result){
-                console.log(result);
                 if (result && result.number) {
                     setNumber(result.number);
                 }
@@ -24,8 +23,8 @@ app.directive('rotator', function () {
             function setNumber(number, index){
                 index = index || 0;
                 if (index > 2) {
-                    if ($scope.callback) { $scope.callback() }
-                    number = [];
+                    $scope.rotIntervalIds = [];
+                    if ($scope.callback) { setTimeout($scope.callback, 1000); }
                     return;
                 }
 
@@ -35,13 +34,13 @@ app.directive('rotator', function () {
                     clearInterval($scope.rotIntervalIds[index]);
                     setPosition(angular.element($rotators[index]), String(number)[index]);
                     setNumber(number, index + 1)
-                }, 5000);
+                }, 2000);
             }
 
             function rotateAll(){
                 if ($scope.rotIntervalIds.length){return false;}
                 angular.forEach($rotators, function(el, index){
-                    var speed =  index*200 + 300;
+                    var speed =  index * 200 + 300;
                     $scope.rotIntervalIds.push(startRotating(angular.element(el), speed));
                 });
             }
