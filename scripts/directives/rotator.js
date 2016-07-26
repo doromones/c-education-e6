@@ -9,7 +9,7 @@ app.directive('rotator', function () {
         },
         controller: function ($scope, $element, $attrs) {
             var $rotators = $element.find('.rotator');
-            var rotIntervalIds = [];
+            $scope.rotIntervalIds = [];
 
             window.Rotators = $scope;
 
@@ -17,34 +17,37 @@ app.directive('rotator', function () {
                 if (number) {
                     setNumber(number);
                 } else {
-                    rotateAll();
+                    // rotateAll();
                 }
             });
 
             function setNumber(number, index){
                 index = index || 0;
                 if (index > 2) {
-                    rotIntervalIds = [];
+                    number = [];
                     return;
                 }
 
+                rotateAll();
+
                 setTimeout(function(){
-                    clearInterval(rotIntervalIds[index]);
+                    clearInterval($scope.rotIntervalIds[index]);
                     setPosition(angular.element($rotators[index]), String(number)[index]);
                     setNumber(number, index + 1)
-                }, 2000);
+                }, 5000);
             }
 
             function rotateAll(){
+                if ($scope.rotIntervalIds.length){return false;}
                 angular.forEach($rotators, function(el, index){
                     var speed =  index*200 + 300;
-                    rotIntervalIds.push(startRotating(angular.element(el), speed));
+                    $scope.rotIntervalIds.push(startRotating(angular.element(el), speed));
                 });
             }
 
             function stopRotateAll(){
-                rotIntervalIds.forEach(function(id){clearInterval(id);});
-                rotIntervalIds = [];
+                $scope.rotIntervalIds.forEach(function(id){clearInterval(id);});
+                $scope.rotIntervalIds = [];
             }
 
             function setPosition($wheel, position) {
@@ -59,10 +62,12 @@ app.directive('rotator', function () {
 
             function startRotating($wheel, time) {
                 var increment = $wheel.attr('data-state');
-                return setInterval(function () {
+                var interval_id = setInterval(function () {
                     increment++;
                     setPosition($wheel, increment);
-                }, time || 1000);
+                }, time || 5000);
+
+                return interval_id;
             }
         }
     }

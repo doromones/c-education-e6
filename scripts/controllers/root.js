@@ -28,7 +28,7 @@ app.controller('RootController', [
         };
 
         $scope.play = function() {
-            $scope.winNumber = 999;
+            $scope.winNumber = 123;
         };
 
         function retOnlyIntGteZero (value){
