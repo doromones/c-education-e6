@@ -27,8 +27,11 @@ app.controller('RootController', [
             $scope.selectedMachine = machine;
         };
 
-        $scope.play = function() {
+        $scope.play = function(rate) {
+            var result = $scope.selectedMachine.play(rate);
+            console.log(result);
             $scope.winNumber = 123;
+
         };
 
         function retOnlyIntGteZero (value){
