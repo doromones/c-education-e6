@@ -27,6 +27,10 @@ app.controller('RootController', [
             $scope.selectedMachine = machine;
         };
 
+        $scope.play = function() {
+            $scope.winNumber = 999;
+        };
+
         function retOnlyIntGteZero (value){
             value = Number(value);
             return isNaN(value) || value <= 0 ? null : value

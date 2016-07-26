@@ -13,13 +13,14 @@ app.directive('rotator', function () {
 
             window.Rotators = $scope;
 
-            // var $first_wheel = angular.element($rotators[0]);
-            // var $second_wheel = angular.element($rotators[1]);
-            // var $third_wheel = angular.element($rotators[2]);
-
-            // var $first_wheel_id = startRotating($first_wheel, 1000);
-            // var $second_wheel_id = startRotating($second_wheel, 1500);
-            // var $third_wheel_id = startRotating($third_wheel, 2000);
+            $scope.$watch('number', function(number){
+                if (number) {
+                    stopRotateAll();
+                    angular.forEach($rotators, function (el, index) {
+                        setPosition(angular.element(el), String(number)[index])
+                    })
+                }
+            });
 
             rotateAll();
 
