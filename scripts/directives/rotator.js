@@ -15,14 +15,25 @@ app.directive('rotator', function () {
 
             $scope.$watch('number', function(number){
                 if (number) {
-                    stopRotateAll();
-                    angular.forEach($rotators, function (el, index) {
-                        setPosition(angular.element(el), String(number)[index])
-                    })
+                    setNumber(number);
+                } else {
+                    rotateAll();
                 }
             });
 
-            rotateAll();
+            function setNumber(number, index){
+                index = index || 0;
+                if (index > 2) {
+                    rotIntervalIds = [];
+                    return;
+                }
+
+                setTimeout(function(){
+                    clearInterval(rotIntervalIds[index]);
+                    setPosition(angular.element($rotators[index]), String(number)[index]);
+                    setNumber(number, index + 1)
+                }, 2000);
+            }
 
             function rotateAll(){
                 angular.forEach($rotators, function(el, index){
