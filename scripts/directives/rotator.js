@@ -5,7 +5,8 @@ app.directive('rotator', function () {
         restrict: 'AE',
         templateUrl: 'rotator.html',
         scope: {
-            number: '='
+            result: '=',
+            callback: '&'
         },
         controller: function ($scope, $element, $attrs) {
             var $rotators = $element.find('.rotator');
@@ -13,17 +14,17 @@ app.directive('rotator', function () {
 
             window.Rotators = $scope;
 
-            $scope.$watch('number', function(number){
-                if (number) {
-                    setNumber(number);
-                } else {
-                    // rotateAll();
+            $scope.$watch('result', function(result){
+                console.log(result);
+                if (result && result.number) {
+                    setNumber(result.number);
                 }
-            });
+            }, true);
 
             function setNumber(number, index){
                 index = index || 0;
                 if (index > 2) {
+                    if ($scope.callback) { $scope.callback() }
                     number = [];
                     return;
                 }

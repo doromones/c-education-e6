@@ -97,6 +97,7 @@ app.service('slotMachine', function () {
                     console.log('You lose :(')
                 }
             }
+            return play_obj;
         };
 
         this.__defineGetter__('money', function(){ return money; });

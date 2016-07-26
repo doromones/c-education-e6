@@ -28,10 +28,11 @@ app.controller('RootController', [
         };
 
         $scope.play = function(rate) {
-            var result = $scope.selectedMachine.play(rate);
-            console.log(result);
-            $scope.winNumber = 123;
+            $scope.result = $scope.selectedMachine.play(rate);
+        };
 
+        $scope.playResultCallback = function(){
+            alert('asdasd')
         };
 
         function retOnlyIntGteZero (value){
