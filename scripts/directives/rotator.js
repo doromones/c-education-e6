@@ -9,6 +9,9 @@ app.directive('rotator', function () {
         },
         controller: function ($scope, $element, $attrs) {
             var $rotators = $element.find('.rotator');
+            var rotIntervalIds = [];
+
+            window.Rotators = $scope;
 
             // var $first_wheel = angular.element($rotators[0]);
             // var $second_wheel = angular.element($rotators[1]);
@@ -18,13 +21,19 @@ app.directive('rotator', function () {
             // var $second_wheel_id = startRotating($second_wheel, 1500);
             // var $third_wheel_id = startRotating($third_wheel, 2000);
 
-            angular.forEach($rotators, function($el, index){
-                setPosition(angular.element($el), index + 3);
-            });
+            rotateAll();
 
-            angular.forEach($rotators, function($el, index){
-                startRotating(angular.element($el));
-            });
+            function rotateAll(){
+                angular.forEach($rotators, function(el, index){
+                    var speed =  index*200 + 300;
+                    rotIntervalIds.push(startRotating(angular.element(el), speed));
+                });
+            }
+
+            function stopRotateAll(){
+                rotIntervalIds.forEach(function(id){clearInterval(id);});
+                rotIntervalIds = [];
+            }
 
             function setPosition($wheel, position) {
                 $wheel.css({
