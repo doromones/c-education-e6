@@ -1,3 +1,21 @@
+rotator {
+    min-height: 210px;
+    display: block;
+}
+.rotator-grid {
+    position: absolute;
+    border: 1px solid;
+    height: 210px;
+    width: 865px;
+    border-radius: 10px;
+}
+.rotator-grid.select-line{
+    position: absolute;
+    border: 1px solid;
+    height: 33px;
+    width: 865px;
+    top: 87px;
+}
 
 .rotator-wrapper,
 .rotator figure {
@@ -99,7 +117,6 @@
     -o-perspective: 1100px;
     perspective: 1100px;
 
-    height: 210px;
     padding-top: 50px;
 }
 

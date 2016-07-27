@@ -5,32 +5,69 @@ app.directive('rotator', function () {
         restrict: 'AE',
         templateUrl: 'rotator.html',
         scope: {
-            number: '='
+            result: '=',
+            callback: '&'
         },
         controller: function ($scope, $element, $attrs) {
-            window.ELEMENT = $element;
             var $rotators = $element.find('.rotator');
-            var $first_wheel = angular.element($rotators[0]);
-            var $second_wheel = angular.element($rotators[1]);
-            var $third_wheel = angular.element($rotators[2]);
+            $scope.rotIntervalIds = [];
 
-            startRotating($first_wheel, 1000);
-            startRotating($second_wheel, 1500);
-            startRotating($third_wheel, 2000);
+            window.Rotators = $scope;
+
+            $scope.$watch('result', function(result){
+                if (result && result.number) {
+                    setNumber(result.number);
+                }
+            }, true);
+
+            function setNumber(number, index){
+                index = index || 0;
+                if (index > 2) {
+                    $scope.rotIntervalIds = [];
+                    if ($scope.callback) { setTimeout($scope.callback, 1000); }
+                    return;
+                }
+
+                rotateAll();
+
+                setTimeout(function(){
+                    clearInterval($scope.rotIntervalIds[index]);
+                    setPosition(angular.element($rotators[index]), String(number)[index]);
+                    setNumber(number, index + 1)
+                }, 2000);
+            }
+
+            function rotateAll(){
+                if ($scope.rotIntervalIds.length){return false;}
+                angular.forEach($rotators, function(el, index){
+                    var speed =  index * 200 + 300;
+                    $scope.rotIntervalIds.push(startRotating(angular.element(el), speed));
+                });
+            }
+
+            function stopRotateAll(){
+                $scope.rotIntervalIds.forEach(function(id){clearInterval(id);});
+                $scope.rotIntervalIds = [];
+            }
+
+            function setPosition($wheel, position) {
+                $wheel.css({
+                    '-webkit-transform': 'rotateX(' + (position * -36) + 'deg)',
+                    '-moz-transform': 'rotateX(' + (position * -36) + 'deg)',
+                    '-o-transform': 'rotateX(' + (position * -36) + 'deg)',
+                    'transform': 'rotateX(' + (position * -36) + 'deg)'
+                });
+                $wheel.attr('data-state', position % 10);
+            }
 
             function startRotating($wheel, time) {
-                var increment = 0;
-                return setInterval(function () {
+                var increment = $wheel.attr('data-state');
+                var interval_id = setInterval(function () {
                     increment++;
-                    $wheel.css({
-                        '-webkit-transform': 'rotateX(' + (increment * -36) + 'deg)'
-                    });
-                    var pastSix = 0;
-                    if (increment > 9) {
-                        increment
-                    }
-                    $wheel.attr('data-state', increment % 10);
-                }, time || 1000);
+                    setPosition($wheel, increment);
+                }, time || 5000);
+
+                return interval_id;
             }
         }
     }

@@ -69,7 +69,10 @@ app.service('slotMachine', function () {
                     result[value] === undefined ? result[value] = 1 : (result[value]++);
                 });
 
-                var maxNumbers = Object.values(result).sort(function (a, b) {
+                var values = [];
+                angular.forEach(result, function(value){values.push(value)});
+
+                var maxNumbers = values.sort(function (a, b) {
                     if (a < b) return 1
                 })[0];
                 play_obj.maxNumbers = maxNumbers;
@@ -94,7 +97,11 @@ app.service('slotMachine', function () {
                     console.log('You lose :(')
                 }
             }
+            return play_obj;
         };
+
+        this.__defineGetter__('money', function(){ return money; });
+        this.__defineGetter__('putedMoney', function(){ return putedMoney; });
 
         return {
             machine: this,
